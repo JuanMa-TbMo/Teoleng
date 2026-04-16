@@ -8,18 +8,26 @@ def programa2(RutaFactura):
     texto = programa1.programa1(RutaFactura)
     aniomesdia=re.search(r'FECHA:(\d{4}-\d{2}-\d{2})', texto)
     diamesanio=re.search(r'FECHA:(\d{2}-\d{2}-\d{4})', texto)
+    fecha_encontrada = "None"
     if aniomesdia:
         anio,mes,dia=aniomesdia.groups()
-        fecha_obj = datetime(int(anio), int(mes), int(dia)).date()
-        fecha_encontrada = fecha_obj.strftime("%Y-%m-%d")
+        try:
+            fecha_obj = datetime(int(anio), int(mes), int(dia)).date()
+            fecha_encontrada = fecha_obj.strftime("%Y-%m-%d")
+        except ValueError:
+            fecha_encontrada = "None"
     elif diamesanio:
         dia,mes,anio=diamesanio.groups()
-        fecha_obj = datetime(int(anio), int(mes), int(dia)).date()
-        fecha_encontrada = fecha_obj.strftime("%Y-%m-%d")
-    
-    
-    
-    monto=re.search(r'DÉBITO BANCARIO\s*(\d{1,3}(?:\.\d{3})*(?:,\d{2})?', texto)
+        try:
+            fecha_obj = datetime(int(anio), int(mes), int(dia)).date()
+            fecha_encontrada = fecha_obj.strftime("%Y-%m-%d")
+        except ValueError:
+            fecha_encontrada = "None"
+    try:
+        monto=re.search(r'DÉBITO BANCARIO\s*(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)', texto).group(1)
+    except AttributeError:
+        monto = "None"
+
     '''
     SU CÓDIGO
     
