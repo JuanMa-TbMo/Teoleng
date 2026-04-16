@@ -5,7 +5,7 @@ import programa1
 import datetime
 
 def programa2(RutaFactura):
-    texto = programa1(RutaFactura)
+    texto = programa1.programa1(RutaFactura)
     aniomesdia=re.search(r'FECHA:(\d{4}-\d{2}-\d{2})', texto)
     diamesanio=re.search(r'FECHA:(\d{2}-\d{2}-\d{4})', texto)
     if aniomesdia:
