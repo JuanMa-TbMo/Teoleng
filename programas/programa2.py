@@ -6,36 +6,44 @@ import datetime
 
 def programa2(RutaFactura):
     texto = programa1.programa1(RutaFactura)
-    aniomesdia=re.search(r'FECHA:(\d{4}-\d{2}-\d{2})', texto)
-    diamesanio=re.search(r'FECHA:(\d{2}-\d{2}-\d{4})', texto)
+    aniomesdia=re.search(r'FECHA:[\s\S]*?(\d{4})[-/](\d{2})[-/](\d{2})', texto,re.DOTALL)
+    diamesanio=re.search(r'FECHA:[\s\S]*?(\d{2})[-/](\d{2})[-/](\d{4})', texto,re.DOTALL)
+
     fecha_encontrada = "None"
+    monto_encontrado = "None"
     if aniomesdia:
         anio,mes,dia=aniomesdia.groups()
         try:
-            fecha_obj = datetime(int(anio), int(mes), int(dia)).date()
+            fecha_obj = datetime.datetime(int(anio), int(mes), int(dia)).date()
             fecha_encontrada = fecha_obj.strftime("%Y-%m-%d")
         except ValueError:
             fecha_encontrada = "None"
     elif diamesanio:
         dia,mes,anio=diamesanio.groups()
         try:
-            fecha_obj = datetime(int(anio), int(mes), int(dia)).date()
+            fecha_obj = datetime.datetime(int(anio), int(mes), int(dia)).date()
             fecha_encontrada = fecha_obj.strftime("%Y-%m-%d")
         except ValueError:
             fecha_encontrada = "None"
-    try:
-        monto=re.search(r'DÉBITO BANCARIO\s*(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)', texto).group(1)
-    except AttributeError:
-        monto = "None"
+
+    monto_encontrado=re.search(r'DÉBITO\s+BANCARIO[\s\S]*?(\d+[,\.]\d{2}|\d+)', texto, re.DOTALL)
+   
+    if monto_encontrado:
+        monto_encontrado = monto_encontrado.group(1)
+     
+        monto_encontrado = monto_encontrado.replace('.', ',') 
+     
+    
 
     '''
     SU CÓDIGO
     
     NOTA: El formato de la fecha debe ser AAAA-MM-DD 
     '''
-    
+    monto= monto_encontrado
+
     fecha =  fecha_encontrada     
-    return fecha, monto
+    return fecha,monto
   
 
 if __name__ == '__main__':
