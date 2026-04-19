@@ -13,15 +13,24 @@ def programa3(RutaFactura):
     
     texto = programa1.programa1(RutaFactura)
 
-    patron = r'posible patron jeje'
+    #Dejo la explicación del regex por si tienen alguna duda
+    #(\d+) uno o más dígitos
+    #\s+ uno o más espacios entre columnas
+    #(.+?) el . es cualquier caracter excepto salto de línea, y el ? es para que tome lo mínimo necesario.
+    #(\d+,\d{2}) uno o más dígitos seguido de una coma seguido de exactamente dos dígitos para los decimales.
 
+    patron = r'(\d+)\s+(.+?)\s+(\d+,\d{2})\s+(\d+,\d{2})'
+
+    items = re.findall(patron, texto)
+
+    res = ""
+
+    for cant, desc, unit, total in items:
+        res += f"Cant: {cant} |Desc: {desc.strip()} | {unit} c/u |Total:  {total}\n"
+
+    #res=f"Cant: 10 |Desc: PRUEBA | 10,10 c/u |Total: 101\n"
     
 
-    res=f"Cant: 10 |Desc: PRUEBA | 10,10 c/u |Total: 101\n"
-    
-
-
-    
     return res
 
 if __name__ == '__main__':
