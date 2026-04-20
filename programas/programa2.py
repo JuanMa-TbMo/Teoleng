@@ -6,8 +6,8 @@ import datetime
 
 def programa2(RutaFactura):
     texto = programa1.programa1(RutaFactura)
-    aniomesdia=re.search(r'FECHA:[\s\S]*?(\d{4})[-/](\d{2})[-/](\d{2})', texto,re.DOTALL)
-    diamesanio=re.search(r'FECHA:[\s\S]*?(\d{2})[-/](\d{2})[-/](\d{4})', texto,re.DOTALL)
+    aniomesdia=re.search(r'FECHA:\s*(\d{4})[-/](\d{2})[-/](\d{2})', texto)
+    diamesanio=re.search(r'FECHA:\s*(\d{2})[-/](\d{2})[-/](\d{4})', texto)
 
     fecha_encontrada = "None"
     monto_encontrado = "None"
@@ -26,7 +26,7 @@ def programa2(RutaFactura):
         except ValueError:
             fecha_encontrada = "None"
 
-    monto_encontrado=re.search(r'DÉBITO\s+BANCARIO[\s\S]*?(\d+[,\.]\d{2}|\d+)', texto, re.DOTALL)
+    monto_encontrado=re.search(r'DÉBITO\s+BANCARIO\s*(\d+(?:[,\.]\d+)?)', texto)
    
     if monto_encontrado:
         monto_encontrado = monto_encontrado.group(1)

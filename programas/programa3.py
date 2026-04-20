@@ -29,7 +29,6 @@ def programa3(RutaFactura):
         res += f"Cant: {cant} |Desc: {desc.strip()} | {unit} c/u |Total:  {total}\n"
 
     #res=f"Cant: 10 |Desc: PRUEBA | 10,10 c/u |Total: 101\n"
-    
 
     return res
 
