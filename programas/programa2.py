@@ -6,7 +6,7 @@ import datetime
 
 def programa2(RutaFactura):
     texto = programa1.programa1(RutaFactura)
-    aniomesdia=re.search(r'FECHA:\s*(\d{4})[-/](\d{2})[-/](\d{2})', texto)
+    aniomesdia=re.search(r'FECHA:\s*(\d{4})[-/](\d{2})[-/](\d{2})', texto) #digitos, guion o barra, digitos, guion o barra, digitos
     diamesanio=re.search(r'FECHA:\s*(\d{2})[-/](\d{2})[-/](\d{4})', texto)
 
     fecha_encontrada = "None"
@@ -16,7 +16,7 @@ def programa2(RutaFactura):
         try:
             fecha_obj = datetime.datetime(int(anio), int(mes), int(dia)).date()
             fecha_encontrada = fecha_obj.strftime("%Y-%m-%d")
-        except ValueError:
+        except ValueError:#eplota en caso de fecha invalida, por ejemplo 2023-02-31
             fecha_encontrada = "None"
     elif diamesanio:
         dia,mes,anio=diamesanio.groups()
