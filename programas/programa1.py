@@ -10,11 +10,9 @@ def programa1(RutaPdf):
     '''
     textoNeto = ""
     reader = pypdf.PdfReader(RutaPdf)
-    paginas = len(reader.pages)
-    while paginas > 0: 
-        pagina = reader.pages[paginas-1]
+    for pagina in reader.pages:
         textoNeto += pagina.extract_text()
-        paginas -= 1
+
     text=textoNeto
     
     
