@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import re
 import sys
-
 def programa4(RutaXML):
     '''
     SU CÓDIGO
     '''
-    text = ""
+    with open(RutaXML,'r',encoding='utf-8') as file:
+        xml_string = file.read()
+    text = xml_string
     return text
   
 
