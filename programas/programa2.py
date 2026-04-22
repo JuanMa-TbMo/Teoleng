@@ -5,6 +5,13 @@ import programa1
 import datetime
 
 def programa2(RutaFactura):
+
+    '''
+    SU CÓDIGO
+    
+    NOTA: El formato de la fecha debe ser AAAA-MM-DD 
+    '''
+
     texto = programa1.programa1(RutaFactura)
     aniomesdia=re.search(r'FECHA:\s*(\d{4})[-/](\d{2})[-/](\d{2})', texto) #digitos, guion o barra, digitos, guion o barra, digitos
     diamesanio=re.search(r'FECHA:\s*(\d{2})[-/](\d{2})[-/](\d{4})', texto)
@@ -34,12 +41,6 @@ def programa2(RutaFactura):
         monto_encontrado = monto_encontrado.replace('.', ',') 
      
     
-
-    '''
-    SU CÓDIGO
-    
-    NOTA: El formato de la fecha debe ser AAAA-MM-DD 
-    '''
     monto= monto_encontrado
 
     fecha =  fecha_encontrada     

@@ -5,8 +5,6 @@ from programa5 import programa5 as hay_movimiento_coincidente
 from programa4 import programa4 as leer_xml
 from programa2 import programa2 as obtener_fecha_monto
 
-# Quedó medio largo pero es porque expliqué casi todas las lineas xd, el código es cortito
-
 def programa6(RutaPdf, RutaXML):
     text = leer_xml(RutaXML)
     
@@ -20,7 +18,7 @@ def programa6(RutaPdf, RutaXML):
     # [^>]* significa; cualquier secuencia de caracteres hasta que encuentre un >
     # El \n al final del patron es para que una vez que borre la linea, no me quede un "hueco" donde estaba la linea
     # Uso count=1 para que se haga una sola vez el re.sub pq hay que borrar una sola linea
-    patron = r'^\s*<BanTeng:Movimiento[^>]*'r'Importe="' + monto + r'"[^>]*Fecha="' + fecha +'"[^>]*/>\n'
+    patron = r"^\s*<BanTeng:Movimiento[^>]*" + r'Importe="' + f"{monto}" + r'"[^>]*Fecha="' + f"{fecha}" + '"[^>]*/>\n'
     new_text = re.sub(patron, "", text, count=1, flags=re.MULTILINE) 
 
     # Acá busco la linea que tiene la cantidad de movimientos, el (\d+) es para buscar uno o más dígitos
